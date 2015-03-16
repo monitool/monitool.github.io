@@ -1,1 +1,493 @@
-<h1>Monitool Project Website</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Monitool REST API Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/highlight.hybrid.css" rel="stylesheet">
+
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+
+<header class="navbar navbar-default navbar-static-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand">Monitool REST API Documentation</a>
+    </div>
+  </div>
+</header>
+
+<!-- Begin Body -->
+<div class="container">
+	<div class="row">
+  			<div class="col-sm-3" id="leftCol">
+              	
+				<div class="well" style="top: 90px; position: fixed;"> 
+              	<ul class="nav nav-stacked" id="sidebar">
+                  <li><a href="#endpoints">End Points</a></li>
+                  <li><a href="#data">/data/</a></li>
+                  <li><a href="#data123">/data/{id}</a></li>
+                  <li><a href="#sensors">/sensors/</a></li>
+                  <li><a href="#sensors123">/sensors/{TOKEN}</a></li>
+                  <li><a href="#complexStat">/complexStat/</a></li>
+                  <li><a href="#complexStat123">/complexStat/{id}</a><br /></li>
+                  <li><a href="#responses">Responses</a></li>
+                  <li><a href="#changelog">Changelog</a></li>
+              	</ul>
+				</div>
+
+      		</div>  
+      		<div class="col-sm-9">
+              	<h2 id="endpoints">Monitool REST API Documentation</h2>
+
+<!-- /data/ -->
+
+              	<hr class="col-sm-12">
+              	<h2 id="data">/data/</h2>
+              	<p>
+                    Collection of data aggregated from <i>Sensors</i>. Contains cpu and memory load.
+                </p>
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>GET</h3></div>
+                    <div class="panel-body">Use to get all data available<br>
+                        <h4>URI</h4>
+                        <pre><code class="http">/data/</code></pre>
+                        <h4>Example response:</h4>
+                        <pre><code class="json">{
+    "data": [
+        {
+            "itemID": 123,
+            "sensorToken": "TOKEN",
+            "date": "2015-03-01 00:00:00",
+            "cpuLoad": 1.23,
+            "memLoad": 0.123
+        },
+        ...
+    ]
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>GET - queries</h3></div>
+                    <div class="panel-body">Use to get specified data<br>
+                        
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Parameter</h4>
+                                <pre><code class="http">/data/?sensorToken={TOKEN}</code></pre>
+                                <h4>Example Query</h4>
+                                <pre><code class="http">/data/?sensorToken=098f6bcd4621d373cade4e832627b4f6</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Parameter</h4>
+                                <pre><code class="http">/data/?date={START},{END}
+/data/?date={START},
+/data/?date=,{END}</code></pre>
+                                <h4>Example Query</h4>
+                                <pre><code class="http">/data/?date="2015-03-01 00:00:00","2015-03-01 12:00:00"</code></pre>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>POST</h3></div>
+                    <div class="panel-body">Insert new data from sensor<br>
+                    <h4>URI</h4>
+                    <pre><code class="http">/data/</code></pre>
+                    <h4>Example query:</h4>
+                    <pre><code class="json">{
+    "sensorToken": "098f6bcd4621d373cade4e832627b4f6",
+    "data": {
+        "cpuLoad": 1.23,
+        "memLoad": 0.123
+    }
+}</code></pre>
+                    <h4>Example response:</h4>
+                    <pre><code class="json">{
+    "itemID": 123
+}</code></pre>
+                    </div>
+                </div>
+                
+
+<!-- /data/{123} -->
+
+                <hr class="col-sm-12">
+                <h2 id="data123">/data/{123}</h2>
+                <p>
+                    Data collected from <i>Sensor</i>. Contains cpu and memory load.
+                </p>
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>GET</h3></div>
+                    <div class="panel-body">
+                        <h4>URI</h4>
+                        <pre><code class="http">/data/{123}</code></pre>
+                        <h4>Example response:</h4>
+                        <pre><code class="json">{
+    "data": {
+        "itemID": 123,
+        "sensorToken": "TOKEN",
+        "date": "2015-03-01 00:00:00",
+        "cpuLoad": 1.23,
+        "memLoad": 0.123
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+              	
+              
+<!-- /sensors/ -->
+
+                <hr class="col-sm-12">
+                <h2 id="sensors">/sensors/</h2>
+                <p>
+                    Collection of available <i>Sensors</i>.
+                </p>
+                <div class="panel panel-default">
+                  <div class="panel-heading"><h3>GET</h3></div>
+                  <div class="panel-body">
+                  <h4>URI</h4>
+                  <pre><code class="http">/sensors/</code></pre>
+                  <h4>Example response:</h4>
+                  <pre><code class="json">{
+    "sensors": [
+        {
+            "sensorToken": "TOKEN",
+            "name": "SENSOR_NAME",
+            "dateJoined": "2015-03-01 00:00:00",
+            "dateLastActive": "2015-03-01 12:00:00"
+        },
+        ...
+    ]
+}</code></pre>
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>GET - queries</h3></div>
+                    <div class="panel-body">Use to get specified data<br>
+                        
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Parameter</h4>
+                                <pre><code class="http">/sensors/?sensorToken={TOKEN}</code></pre>
+                                <h4>Example Query</h4>
+                                <pre><code class="http">/sensors/?sensorToken=098f6bcd4621d373cade4e832627b4f6</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Parameter</h4>
+                                <pre><code class="http">/sensors/?name={NAME}</code></pre>
+                                <h4>Example Query</h4>
+                                <pre><code class="http">/sensors/?name=HOST%</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Parameter</h4>
+                                <pre><code class="http">/sensors/?dateJoined={START},{END}
+/sensors/?dateJoined={START},
+/sensors/?dateJoined=,{END}</code></pre>
+                                <h4>Example Query</h4>
+                                <pre><code class="http">/sensors/?dateJoined="2015-03-01 00:00:00","2015-03-01 12:00:00"</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Parameter</h4>
+                                <pre><code class="http">/sensors/?dateLastActive={START},{END}
+/sensors/?dateLastActive={START},
+/sensors/?dateLastActive=,{END}</code></pre>
+                                <h4>Example Query</h4>
+                                <pre><code class="http">/sensors/?dateLastActive="2015-03-01 00:00:00","2015-03-01 12:00:00"</code></pre>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>POST</h3></div>
+                    <div class="panel-body">Insert new sensor<br>
+                    <h4>URI</h4>
+                    <pre><code class="http">/sensor/</code></pre>
+                    <h4>Example query:</h4>
+                    <pre><code class="json">{
+    "sensor": {
+        "name": "SENSOR_NAME"
+    }
+}</code></pre>
+                    <h4>Example response:</h4>
+                    <pre><code class="json">{
+    "sensorToken": "098f6bcd4621d373cade4e832627b4f6"
+}</code></pre>
+                  </div>
+                </div>
+
+   
+<!-- /sensors/{123} -->
+
+                <hr class="col-sm-12">
+                <h2 id="sensors123">/sensors/{TOKEN}</h2>
+                <p>
+                    Info about <i>Sensor</i>.
+                </p>
+                <div class="panel panel-default">
+                  <div class="panel-heading"><h3>GET</h3></div>
+                  <div class="panel-body">
+                  <h4>URI</h4>
+                  <pre><code class="http">/sensors/{TOKEN}</code></pre>
+                  <h4>Example response:</h4>
+                  <pre><code class="json">{
+    "sensor": {
+        "sensorToken": "TOKEN",
+        "name": "SENSOR_NAME",
+        "dateJoined": "2015-03-01 00:00:00",
+        "dateLastActive": "2015-03-01 12:00:00"
+    }
+}</code></pre>
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>POST</h3></div>
+                    <div class="panel-body">Update sensor<br>
+                    <h4>URI</h4>
+                    <pre><code class="http">/sensor/{TOKEN}</code></pre>
+                    <h4>Example query:</h4>
+                    <pre><code class="json">{
+    "sensor": {
+        "name": "SENSOR_NAME"
+    }
+}</code></pre>
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>DELETE</h3></div>
+                    <div class="panel-body">Delete sensor<br>
+                        <h4>URI</h4>
+                        <pre><code class="http">/sensor/{TOKEN}</code></pre>
+                    </div>
+                </div>
+
+
+       
+<!-- /complexStat/ -->
+
+                <hr class="col-sm-12">
+                <h2 id="sensors">/complexStat/</h2>
+                <p>
+                    Collection of ongoing <i>Complex Statistics</i>.
+                </p>
+
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Available Values</th>
+                            <th>Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i>statType</i></td>
+                            <td>AVG - average,<br />MAX - maximum,<br />MIN - minimum,<br />MED - median</td>
+                            <td>Defines kind of statistics</td>
+                        </tr>
+                        <tr>
+                            <td><i>itemType</i></td>
+                            <td>CPU - load of CPU,<br />MEM - load of RAM</td>
+                            <td>Defines type of data</td>
+                        </tr>
+                        <tr>
+                            <td><i>period</i></td>
+                            <td>seconds</td>
+                            <td>Defines duration in which the statistic will be computed on each iteration</td>
+                        </tr>
+                        <tr>
+                            <td><i>repeat</i></td>
+                            <td>seconds</td>
+                            <td>Defines how often the iteration will occur</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading"><h3>GET</h3></div>
+                  <div class="panel-body">
+                  <h4>URI</h4>
+                  <pre><code class="http">/complexStat/</code></pre>
+                  <h4>Example response:</h4>
+                  <pre><code class="json">{
+    "stats": [
+        {
+            "statID": 123,
+            "statType": "AVG",
+            "itemType": "CPU/MEM",
+            "period": 300,
+            "repeat": 60
+        },
+        ...
+    ]
+}</code></pre>
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>POST</h3></div>
+                    <div class="panel-body">Insert new complex statistics<br>
+                    <h4>URI</h4>
+                    <pre><code class="http">/complexStat/</code></pre>
+                    <h4>Example query:</h4>
+                    <pre><code class="json">{
+    "stat": {
+        "statType": "AVG",
+        "itemType": "CPU/MEM",
+        "period": 300,
+        "repeat": 60
+    }
+}</code></pre>
+                    <h4>Example response:</h4>
+                    <pre><code class="json">{
+    "statID": 123
+}</code></pre>
+                  </div>
+                </div>
+
+
+
+    
+<!-- /complexStat/{123} -->
+
+                <hr class="col-sm-12">
+                <h2 id="sensors">/complexStat/{123}</h2>
+                <p>
+                    Item of ongoing <i>Complex Statistics</i>.
+                </p>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading"><h3>GET</h3></div>
+                  <div class="panel-body">
+                  <h4>URI</h4>
+                  <pre><code class="http">/complexStat/{123}</code></pre>
+                  <h4>Example response:</h4>
+                  <pre><code class="json">{
+    "stat": {
+        "statID": 123,
+        "statType": "AVG",
+        "itemType": "CPU/MEM",
+        "period": 300,
+        "repeat": 60
+    }
+}</code></pre>
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>POST</h3></div>
+                    <div class="panel-body">Update complex statistics<br>
+                    <h4>URI</h4>
+                    <pre><code class="http">/complexStat/{123}</code></pre>
+                    <h4>Example query:</h4>
+                    <pre><code class="json">{
+    "stat": {
+        "statType": "AVG",
+        "itemType": "CPU/MEM",
+        "period": 300,
+        "repeat": 60
+    }
+}</code></pre>
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>DELETE</h3></div>
+                    <div class="panel-body">Delete complex statistics<br>
+                        <h4>URI</h4>
+                        <pre><code class="http">/complexStat/{123}</code></pre>
+                    </div>
+                </div>
+
+<!-- responses -->
+
+
+                <hr class="col-sm-12">
+                <h2 id="responses">Responses</h2>
+                <p>
+                    Possible responses
+                </p>
+
+                <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Response code</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i>200</i></td>
+                        <td>OK - All Correct</td>
+                    </tr>
+                    <tr>
+                        <td><i>201</i></td>
+                        <td>Created</td>
+                    </tr>
+                    <tr>
+                        <td><i>202</i></td>
+                        <td>Accepted</td>
+                    </tr>
+                    <tr>
+                        <td><i>404</i></td>
+                        <td>Not Found</td>
+                    </tr>
+                    <tr>
+                        <td><i>500</i></td>
+                        <td>Internal Server Error</td>
+                    </tr>
+                    <tr>
+                        <td><i>503</i></td>
+                        <td>Service Unavailable</td>
+                    </tr>
+                </tbody>
+            </table>
+
+<!-- Changelog -->
+
+
+                <hr class="col-sm-12">
+                <h2 id="changelog">Changelog</h2>
+                <p>
+                    <span class="badge">v. 0.0.1</span> This document
+                </p>
+
+              	
+      		</div> 
+  	</div>
+</div>
+
+	</body>
+</html>
