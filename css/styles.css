@@ -5,3 +5,10 @@ pre {
 	background-color: #1D1F21;
 	border-color: #1D1F21;
 }
+
+@media (min-width: 768px) {
+	#leftCol .well {
+		top: 90px;
+		position: fixed;
+	}
+}
