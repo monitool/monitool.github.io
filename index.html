@@ -298,7 +298,7 @@
 <!-- /complexStat/ -->
 
                 <hr class="col-sm-12">
-                <h2 id="sensors">/complexStat/</h2>
+                <h2 id="complexStat">/complexStat/</h2>
                 <p>
                     Collection of ongoing <i>Complex Statistics</i>.
                 </p>
@@ -383,9 +383,9 @@
 <!-- /complexStat/{123} -->
 
                 <hr class="col-sm-12">
-                <h2 id="sensors">/complexStat/{123}</h2>
+                <h2 id="complexStat123">/complexStat/{123}</h2>
                 <p>
-                    Item of ongoing <i>Complex Statistics</i>.
+                    Item of ongoing <i>Complex Statistics</i> together with data.
                 </p>
 
                 <div class="panel panel-default">
@@ -401,7 +401,15 @@
         "itemType": "CPU/MEM",
         "period": 300,
         "repeat": 60
-    }
+    },
+    "data": [
+        {
+            "sensorToken": "TOKEN",
+            "timestamp": "2015-03-01 00:00:00",
+            "value": 123.0
+        },
+        ...
+    ]
 }</code></pre>
                   </div>
                 </div>
@@ -481,7 +489,8 @@
                 <hr class="col-sm-12">
                 <h2 id="changelog">Changelog</h2>
                 <p>
-                    <span class="badge">v. 0.0.1</span> This document
+                    <span class="badge">v. 0.0.2</span> Added returned data to <i>/complexStat/{123}</i> <br>
+                    <span class="badge">v. 0.0.1</span> This document <br>
                 </p>
 
               	
